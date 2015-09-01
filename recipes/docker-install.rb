@@ -1,6 +1,6 @@
  #
  # Cookbook Name:: myface
- # Recipe:: install
+ # Recipe:: docker-install
  #
 
 case node[:platform]
