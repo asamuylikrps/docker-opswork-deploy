@@ -6,5 +6,3 @@ description      'Installs/Configures myface'
 long_description 'Installs/Configures myface'
 version          '0.1.0'
 
-depends 'vim', '~> 1.1.2'
-depends 'apache2', '~> 3.1.0'
