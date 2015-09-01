@@ -9,6 +9,7 @@ MAINTAINER asamuylik@remedypointsolutions.com
 RUN apt-get update -y
 RUN apt-get install -y 		\
 	git 					\
+	vim						\
 	curl 					\
 	apache2 				\
 	php5 					\
@@ -26,13 +27,16 @@ ENV APACHE_RUN_USER www-data
 ENV APACHE_RUN_GROUP www-data
 ENV APACHE_LOG_DIR /var/log/apache2
 
-ADD https://github.com/asamuylikrps/docker-opswork-deploy/blob/master/templates/vhosts/minnesotaunited.conf /data/vhosts/
-ADD https://github.com/asamuylikrps/docker-opswork-deploy/blob/master/scripts/setup.sh /scripts/
+RUN echo "ServerName localhost" | sudo tee /etc/apache2/conf-available/fqdn.conf
+RUN sudo a2enconf fqdn
+
+ADD https://raw.githubusercontent.com/asamuylikrps/docker-opswork-deploy/master/templates/vhosts/minnesotaunited.conf /data/vhosts/
+ADD https://raw.githubusercontent.com/asamuylikrps/docker-opswork-deploy/master/scripts/setup.sh /scripts/
 
 RUN chmod +x /scripts/setup.sh
 
 EXPOSE 80
 
 CMD ["/scripts/setup.sh"]
-
+#CMD ["/usr/bin/source", "/etc/apache2/envvars"]
 #CMD ["/usr/sbin/apache2", "-D",  "FOREGROUND"]

@@ -1,6 +1,5 @@
 #! /bin/bash
 
+source /etc/apache2/envvars
 
-
-echo "Hello, World!"
-
+apache2 -D FOREGROUND
