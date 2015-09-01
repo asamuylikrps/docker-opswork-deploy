@@ -26,6 +26,13 @@ ENV APACHE_RUN_USER www-data
 ENV APACHE_RUN_GROUP www-data
 ENV APACHE_LOG_DIR /var/log/apache2
 
+ADD https://github.com/asamuylikrps/docker-opswork-deploy/blob/master/templates/vhosts/minnesotaunited.conf /data/vhosts/
+ADD https://github.com/asamuylikrps/docker-opswork-deploy/blob/master/scripts/setup.sh /scripts/
+
+RUN chmod +x /scripts/setup.sh
+
 EXPOSE 80
+
+CMD ["/scripts/setup.sh"]
 
 #CMD ["/usr/sbin/apache2", "-D",  "FOREGROUND"]
